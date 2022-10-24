@@ -2,4 +2,24 @@
 
 Generate commits in `git` to create GitHub contributions in particular.
 
+## Usage
 
+The generator is a bash script that can be ran directly from the command line.
+
+```
+$ ./generate-git-contributions.sh --help
+
+GIT CONTRIBUTIONS GENERATOR
+
+Simple bash script to generate git contributions
+Usage:
+  generate-git-contributions.sh [--options] [<arguments>]
+  generate-git-contributions.sh -h | --help
+Options:
+  -h --help  Display this help information.
+  --debug    Enable verbose output
+  --folder   Folder path of the git repository where to apply changes
+  --start    Start time from which the commits are generated
+  --end      End time up to which the commits are generated
+  --time     Base time aroun which commits are generated
+```
