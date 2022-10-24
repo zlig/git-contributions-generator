@@ -1,2 +1,5 @@
 # git-contributions-generator
-Generate GIT contributions
+
+Generate commits in `git` to create GitHub contributions in particular.
+
+
