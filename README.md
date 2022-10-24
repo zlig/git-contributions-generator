@@ -23,3 +23,10 @@ Options:
   --end      End time up to which the commits are generated
   --time     Base time aroun which commits are generated
 ```
+
+## Examples
+
+```
+# Generate contributions between the start of September and the end of October with commits around the time 13:00 with logging verbosity enabled
+./generate-git-contributions.sh --folder /home/user/workspace/example-repo/ --start 2022-09-01 --end 2022-10-23 --time "13:00:00" --debug
+```
