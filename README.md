@@ -30,3 +30,8 @@ Options:
 # Generate contributions between the start of September and the end of October with commits around the time 13:00 with logging verbosity enabled
 ./generate-git-contributions.sh --folder /home/user/workspace/example-repo/ --start 2022-09-01 --end 2022-10-23 --time "13:00:00" --debug
 ```
+
+## Resources
+
+- Bash bolierplate/template: https://github.com/xwmx/bash-boilerplate
+- Metaphor generator: http://metaphorpsum.com/sentences/
