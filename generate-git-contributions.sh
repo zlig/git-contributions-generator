@@ -148,7 +148,7 @@ _process() {
 
   # Create and commit a temporary file
   _debug printf "Repository folder ${_FOLDER_PATH}"
-  cd ${_FOLDER_PATH}
+  cd "${_FOLDER_PATH}"
   echo "__MODIFIED__" > generated_contributions.txt.template
   echo "Generated contributions" > generated_contributions.txt
   git add generated_contributions.txt
@@ -175,9 +175,9 @@ _process() {
 
   # Fetch random text paragraphs a random number of times and commit them in the current day
   _debug printf "Processing"
-  for current_date in ${dates_list[@]}
+  for current_date in "${dates_list[@]}"
   do
-    index=$(($RANDOM % ${#_NUM_COMMITS[@]}))
+    index=$((RANDOM % "${#_NUM_COMMITS[@]}"))
     repetitions=${_NUM_COMMITS[$index]}
     _debug printf "Applying [ $repetitions ] commits on $current_date $_BASE_TIME +0100"
 
@@ -185,7 +185,7 @@ _process() {
     do
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
       article=$(shuf -i1-100 -n1)
-      TEXT=$(curl http://metaphorpsum.com/sentences/$article)
+      TEXT=$(curl "http://metaphorpsum.com/sentences/$article")
       _debug printf "Applying for ${current_time}"
       sed "s/__MODIFIED__/$TEXT/g" generated_contributions.txt.template > generated_contributions.txt
       git commit -a -m "Updating content" --date="$current_time +0100"
@@ -202,7 +202,7 @@ _process() {
 
   # Completion
   printf "\nProcessing complete successfully!\n"
-  printf "Please review the ${num_commits} generated commits with 'git status' and 'git log --stat' before pushing the changes\n"
+  printf "Please review the %d generated commits with 'git status' and 'git log --stat' before pushing the changes\n" "${num_commits}"
 
 }
 
