@@ -1,4 +1,5 @@
 # git-contributions-generator
+![build](https://github.com/zlig/git-contributions-generator/.github/workflow/shellcheck.yml/badge.svg)
 
 Generate commits in `git` to create GitHub contributions in particular.
 
@@ -40,5 +41,5 @@ Options:
 
 ## Resources
 
-- Bash bolierplate/template: https://github.com/xwmx/bash-boilerplate
+- Bash boilerplate/template: https://github.com/xwmx/bash-boilerplate
 - Metaphor generator: http://metaphorpsum.com/sentences/
