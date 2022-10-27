@@ -25,4 +25,4 @@ jobs:
       - name: Runs ShellCheck
         run: |
           # Run shellcheck for all *.sh except contrib/ and .git/
-          find . -name '*.sh' -not -path './contrib/*' -not -path './.git/*' | xargs shellcheck -s bash -S error
+          find . -name '*.sh' -not -path './contrib/*' -not -path './.git/*' | xargs shellcheck -s bash -S warning
