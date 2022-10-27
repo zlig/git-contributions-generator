@@ -29,8 +29,8 @@ _PRINT_HELP=0
 _USE_DEBUG=0
 
 # Date and time interval to create commits
-_START_DATE=0
-_END_DATE=0
+_START_DATE="1970-01-01"
+_END_DATE="1999-12-31"
 _BASE_TIME="11:00:00"
 
 # Semi-random number of commits per day
