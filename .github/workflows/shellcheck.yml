@@ -24,5 +24,8 @@ jobs:
 
       - name: Runs ShellCheck
         run: |
+          # Display what files are in the repo
+          pwd
+          ls -lsthR
           # Run shellcheck for all *.sh except contrib/ and .git/
           find . -name '*.sh' -not -path './contrib/*' -not -path './.git/*' | xargs shellcheck -s bash -S warning
