@@ -34,15 +34,7 @@ _END_DATE="1999-12-31"
 _BASE_TIME="11:00:00"
 
 # Semi-random number of commits per day
-_NUM_COMMITS=()
-_NUM_COMMITS[0]="1"
-_NUM_COMMITS[1]="7"
-_NUM_COMMITS[2]="10"
-_NUM_COMMITS[3]="8"
-_NUM_COMMITS[4]="3"
-_NUM_COMMITS[5]="5"
-_NUM_COMMITS[6]="18"
-_NUM_COMMITS[7]="23"
+_NUM_COMMITS=("1" "7" "10" "8" "3" "5" "18" "23")
 
 _ME="$(basename "${0}")"
 __DEBUG_COUNTER=0
