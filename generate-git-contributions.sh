@@ -41,7 +41,7 @@ _NUM_COMMITS=("1" "7" "10" "8" "3" "5" "18" "23")
 
 # Functions
 
-_debug() {
+debug() {
   if ((${_USE_DEBUG:-0}))
   then
     _DEBUG_COUNTER=$((_DEBUG_COUNTER+1))
@@ -52,15 +52,14 @@ _debug() {
   fi
 }
 
-_exit_1() {
+exit_1() {
   {
-    printf "%s " "$(tput setaf 1)!$(tput sgr0)"
-    "${@}"
+    printf "%s %s \n" "$(tput setaf 1)!$(tput sgr0)" "$@"
   } 1>&2
   exit 1
 }
 
-_warn() {
+warn() {
   {
     printf "%s " "$(tput setaf 1)!$(tput sgr0)"
     "${@}"
@@ -75,11 +74,11 @@ __get_option_value() {
   then
     printf "%s\\n" "${__val}"
   else
-    _exit_1 printf "%s requires a valid argument.\\n" "${__arg}"
+    exit_1 "Requires a valid argument for ${__arg}"
   fi
 }
 
-_print_help() {
+print_help() {
   cat <<HEREDOC
 GIT CONTRIBUTIONS GENERATOR
 
@@ -125,7 +124,7 @@ do
       date "+%Y-%m-%d %H:%M:%S" -d "1970-01-01 ${_BASE_TIME}" > /dev/null
       ;;
     -*)
-      _exit_1 printf "Unexpected option: %s\\n" "${__arg}"
+      exit_1 "Unexpected option: '${__arg}'"
       ;;
   esac
 
@@ -135,11 +134,10 @@ done
 # Main processing
 _process() {
   num_commits=0
-  _debug  "Generating contributions..."
-  #_debug "Generating contributions..."
+  debug  "Generating contributions..."
 
   # Create and commit a temporary file
-  _debug "Repository folder ${_FOLDER_PATH}"
+  debug "Repository folder ${_FOLDER_PATH}"
   cd "${_FOLDER_PATH}"
   echo "__MODIFIED__" > generated_contributions.txt.template
   echo "Generated contributions" > generated_contributions.txt
@@ -147,8 +145,8 @@ _process() {
   git commit generated_contributions.txt -m "Adds file" --date="${_START_DATE} ${_BASE_TIME}  +0100"
 
   # Validate dates range
-  _debug "Start date ${_START_DATE}"
-  _debug "End date ${_END_DATE}"
+  debug "Start date ${_START_DATE}"
+  debug "End date ${_END_DATE}"
   start="${_START_DATE}"
   end="${_END_DATE}"
   declare -a dates_list=()
@@ -158,27 +156,27 @@ _process() {
   fi
 
   # Generate dates list
-  _debug "Dates list"
+  debug "Dates list"
   while ! [[ $start > $end ]]; do
     dates_list+=("$start")
     start=$(date -d "$start + 1 day" +%F)
   done  
-  _debug '%s  ' "${dates_list[@]}"
+  debug '%s  ' "${dates_list[@]}"
 
   # Fetch random text paragraphs a random number of times and commit them in the current day
-  _debug "Processing"
+  debug "Processing"
   for current_date in "${dates_list[@]}"
   do
     index=$((RANDOM % "${#_NUM_COMMITS[@]}"))
     repetitions=${_NUM_COMMITS[$index]}
-    _debug "Applying [ $repetitions ] commits on $current_date $_BASE_TIME +0100"
+    debug "Applying [ $repetitions ] commits on $current_date $_BASE_TIME +0100"
 
     for i in $(seq 1 $repetitions)
     do
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
       article=$(shuf -i1-100 -n1)
       TEXT=$(curl "http://metaphorpsum.com/sentences/$article")
-      _debug "Applying for ${current_time}"
+      debug "Applying for ${current_time}"
       sed "s/__MODIFIED__/$TEXT/g" generated_contributions.txt.template > generated_contributions.txt
       git commit -a -m "Updating content" --date="$current_time +0100"
       num_commits=$((num_commits+1))
@@ -201,7 +199,7 @@ _process() {
 _main() {
   if ((_PRINT_HELP))
   then
-    _print_help
+    print_help
   else
     _process "$@"
   fi
