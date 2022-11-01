@@ -16,7 +16,7 @@
 # Usage:
 #   generate-git-contributions.sh <options>...
 #
-# Copyright (c) 2022 geld.tech
+# Copyright (c) 2022 zlig @ geld.tech
 
 set -u
 set -e
@@ -132,7 +132,7 @@ do
 done
 
 # Main processing
-_process() {
+process() {
   num_commits=0
   debug  "Generating contributions..."
 
@@ -196,15 +196,15 @@ _process() {
 
 }
 
-_main() {
+main() {
   if ((_PRINT_HELP))
   then
     print_help
   else
-    _process "$@"
+    process "$@"
   fi
 }
 
 # MAIN
-_main "$@"
+main "$@"
 
