@@ -25,6 +25,8 @@ set -o pipefail
 IFS=$'\n\t'
 
 # System variables
+_ME="$(basename "${0}")"
+_DEBUG_COUNTER=0
 _PRINT_HELP=0
 _USE_DEBUG=0
 
@@ -36,18 +38,16 @@ _BASE_TIME="11:00:00"
 # Semi-random number of commits per day
 _NUM_COMMITS=("1" "7" "10" "8" "3" "5" "18" "23")
 
-_ME="$(basename "${0}")"
-__DEBUG_COUNTER=0
 
 # Functions
 
 _debug() {
   if ((${_USE_DEBUG:-0}))
   then
-    __DEBUG_COUNTER=$((__DEBUG_COUNTER+1))
+    _DEBUG_COUNTER=$((_DEBUG_COUNTER+1))
     {
       # Prefix debug message with "bug (U+1F41B)"
-      printf "\n>> %s - " "${__DEBUG_COUNTER}"
+      printf "\n>> %s - " "${_DEBUG_COUNTER}"
       "${@}"
     } 1>&2
   fi
