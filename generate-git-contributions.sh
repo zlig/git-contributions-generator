@@ -29,6 +29,7 @@ _ME="$(basename "${0}")"
 _DEBUG_COUNTER=0
 _PRINT_HELP=0
 _USE_DEBUG=0
+_FOLDER_PATH="."
 
 # Date and time interval to create commits
 _START_DATE="1970-01-01"
