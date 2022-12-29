@@ -141,11 +141,15 @@ process() {
   debug  "Generating contributions..."
 
   # Create and commit a temporary file
-  debug "Repository folder ${_FOLDER_PATH}"
+  debug "Repository folder ${_FOLDER_PATH} "
   cd "${_FOLDER_PATH}"
+  debug "Preparing template ..."
   echo "__MODIFIED__" > generated_contributions.txt.template
+  debug "Preparing contributions file ..."
   echo "Generated contributions" > generated_contributions.txt
   git add generated_contributions.txt
+  debug "Committing contributions file ..."
+  echo ""
   git commit generated_contributions.txt -m "Adds file" --date="${_START_DATE} ${_BASE_TIME}  +0100"
 
   # Validate dates range
