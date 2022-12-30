@@ -39,8 +39,9 @@ _BASE_TIME="11:00:00"
 # Semi-random number of commits per day
 _NUM_COMMITS=("7" "10" "8" "3" "5" "18" "1" "23")
 
-# Seeding random generator
-RANDOM=$$
+# Better random generator seeding
+RANDOM=$(date +%N | cut -b4-9)
+
 
 # Functions
 
