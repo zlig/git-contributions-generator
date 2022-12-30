@@ -156,7 +156,7 @@ process() {
   declare -a dates_list=()
   if ! [[ $start < $end ]]
   then
-    _exit_1 printf "Error: end date must be after start date, or incorrect date format (YYYY-MM-DD expected)!\\n"
+    exit_1 printf "Error: end date must be after start date, or incorrect date format (YYYY-MM-DD expected)!\\n"
   fi
 
   # Generate dates list
