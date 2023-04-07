@@ -179,7 +179,7 @@ process() {
     repetitions=${_NUM_COMMITS[$index]}
     debug "Applying [ $repetitions ] commits on $current_date $_BASE_TIME +0100"
 
-    for i in $(seq 1 $repetitions)
+    for i in $(seq 1 "$repetitions")
     do
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
       article=$(shuf -i1-100 -n1)
