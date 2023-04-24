@@ -29,7 +29,9 @@ _ME="$(basename "${0}")"
 _DEBUG_COUNTER=0
 _PRINT_HELP=0
 _USE_DEBUG=0
+_CACHE_PATH=".cache"
 _FOLDER_PATH="."
+_MAX_ARTICLE=100
 
 # Date and time interval to create commits
 _START_DATE="1970-01-01"
@@ -182,8 +184,13 @@ process() {
     for i in $(seq 1 "$repetitions")
     do
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
-      article=$(shuf -i1-100 -n1)
-      TEXT=$(curl "http://metaphorpsum.com/sentences/$article")
+      article_index=$(shuf -i1-$_MAX_ARTICLE -n1)
+      current_file="$_CACHE_PATH/$article_index"
+      # Fetch and cache paragraph
+      if [ ! -f "$current_file" ]; then
+        curl -o "$current_file" "http://metaphorpsum.com/sentences/$article_index"
+      fi
+      TEXT=$(cat $current_file)
       debug "Applying for ${current_time}"
       sed "s/__MODIFIED__/$TEXT/g" generated_contributions.txt.template > generated_contributions.txt
       git commit -a -m "Updating content" --date="$current_time +0100"
