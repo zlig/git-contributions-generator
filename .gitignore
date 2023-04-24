@@ -1,4 +1,5 @@
 generated_contributions.txt.template
+.cache/
 
 # Prerequisites
 *.d
