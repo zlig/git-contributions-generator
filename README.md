@@ -1,5 +1,5 @@
 # git-contributions-generator
-![build](https://github.com/zlig/git-contributions-generator/.github/workflow/shellcheck.yml/badge.svg)
+![build](https://github.com/zlig/git-contributions-generator/actions/workflows/shellcheck.yml/badge.svg)
 
 Generate commits in `git` to create GitHub contributions in particular.
 
