@@ -175,6 +175,7 @@ process() {
 
   # Fetch random text paragraphs a random number of times and commit them in the current day
   debug "Processing"
+  mkdir -p $_CACHE_PATH/
   for current_date in "${dates_list[@]}"
   do
     index=$((RANDOM % "${#_NUM_COMMITS[@]}"))
