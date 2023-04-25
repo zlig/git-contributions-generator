@@ -53,7 +53,7 @@ debug() {
     _DEBUG_COUNTER=$((_DEBUG_COUNTER+1))
     {
       # Prefix debug message
-      printf "\n>> %s - %s" "${_DEBUG_COUNTER}" "$@"
+      printf "\n>> %s - %s\n" "${_DEBUG_COUNTER}" "$@"
     } 1>&2
   fi
 }
@@ -67,7 +67,7 @@ exit_1() {
 
 warn() {
   {
-    printf "%s " "$(tput setaf 1)!$(tput sgr0)"
+    printf "%s \n" "$(tput setaf 1)!$(tput sgr0)"
     "${@}"
   } 1>&2
 }
