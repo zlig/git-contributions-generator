@@ -166,12 +166,13 @@ process() {
   fi
 
   # Generate dates list
-  debug "Dates list"
   while ! [[ $start > $end ]]; do
     dates_list+=("$start")
     start=$(date -d "$start + 1 day" +%F)
   done  
-  debug '%s  ' "${dates_list[@]}"
+  printf -v dates_temp "\n\t%s" "${dates_list[@]}"
+  debug "Dates list: ${dates_temp}" 
+
 
   # Fetch random text paragraphs a random number of times and commit them in the current day
   debug "Processing"
