@@ -36,7 +36,6 @@ Options:
   --end 2022-10-23 \
   --time "13:00:00" \
   --debug
-
 ```
 
 ## Resources
