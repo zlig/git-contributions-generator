@@ -215,7 +215,7 @@ process() {
 
 failure() {
   local lineno=$1
-  echo "Failed at $lineno"
+  echo "Failed at line $lineno"
 }
 
 main() {
