@@ -213,6 +213,11 @@ process() {
 
 }
 
+failure() {
+  local lineno=$1
+  echo "Failed at $lineno"
+}
+
 main() {
   if ((_PRINT_HELP))
   then
@@ -223,5 +228,5 @@ main() {
 }
 
 # MAIN
+trap 'failure ${LINENO}' ERR
 main "$@"
-
