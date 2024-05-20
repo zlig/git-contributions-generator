@@ -185,6 +185,7 @@ process() {
 
     for i in $(seq 1 "$repetitions")
     do
+      debug "Applying repetition ${i}"
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
       article_index=$(shuf -i1-$_MAX_ARTICLE -n1)
       current_file="$_CACHE_PATH/$article_index"
@@ -215,7 +216,7 @@ process() {
 
 failure() {
   local lineno=$1
-  echo "Failed at line $lineno"
+  exit_1 "Failed at line $lineno"
 }
 
 main() {
