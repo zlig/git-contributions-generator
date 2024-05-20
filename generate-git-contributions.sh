@@ -196,6 +196,7 @@ process() {
       TEXT=$(cat $current_file)
       debug "Applying for ${current_time}"
       sed "s/__MODIFIED__/$TEXT/g" generated_contributions.txt.template > generated_contributions.txt
+      echo "$current_time $current_file" >> generated_contributions.txt
       git commit -a -m "Updating content" --date="$current_time +0100"
       num_commits=$((num_commits+1))
     done
