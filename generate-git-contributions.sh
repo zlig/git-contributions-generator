@@ -72,6 +72,11 @@ warn() {
   } 1>&2
 }
 
+failure() {
+  local lineno=$1
+  exit_1 "Failed at line $lineno"
+}
+
 __get_option_value() {
   local __arg="${1:-}"
   local __val="${2:-}"
@@ -185,7 +190,6 @@ process() {
 
     for i in $(seq 1 "$repetitions")
     do
-      debug "Applying repetition ${i}"
       current_time=$(date "+%Y-%m-%d %H:%M:%S"  -d "${current_date} ${_BASE_TIME} ${i}min")
       article_index=$(shuf -i1-$_MAX_ARTICLE -n1)
       current_file="$_CACHE_PATH/$article_index"
@@ -194,7 +198,8 @@ process() {
         curl -o "$current_file" "http://metaphorpsum.com/sentences/$article_index"
       fi
       TEXT=$(cat $current_file)
-      debug "Applying for ${current_time}"
+
+      debug "Applying repetition ${i} for ${current_time} with ${current_file}"
       sed "s/__MODIFIED__/$TEXT/g" generated_contributions.txt.template > generated_contributions.txt
       echo "$current_time $current_file" >> generated_contributions.txt
       git commit -a -m "Updating content" --date="$current_time +0100"
@@ -213,11 +218,6 @@ process() {
   printf "\nProcessing complete successfully!\n"
   printf "Please review the %d generated commits with 'git status' and 'git log --stat' before pushing the changes\n" "${num_commits}"
 
-}
-
-failure() {
-  local lineno=$1
-  exit_1 "Failed at line $lineno"
 }
 
 main() {
